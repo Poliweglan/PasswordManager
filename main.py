@@ -1,8 +1,8 @@
-from PassMngrCore import DisplayMenu
+from PassMngrCore import Core
 
 
 def main():
-    print(DisplayMenu.main_menu())
+    Core.start()
 
 
 if __name__ == '__main__':
