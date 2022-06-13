@@ -9,8 +9,8 @@ class BaseConnect:
 
     def __enter__(self):
         try:
-            print(f"connect to database {self.file_db}")
             self.conn = sqlite3.connect(self.file_db)
+            print(f"connect to database {self.file_db}")
         except Error as e:
             print(e)
 

@@ -2,6 +2,7 @@ from PassMngrCore import Core
 
 
 def main():
+    """Main function where we start program"""
     Core.start()
 
 

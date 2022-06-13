@@ -6,7 +6,7 @@ __config = {
     },
     'license': 'MIT',
     'author': {
-        'name': 'Poliweglan',
+        'username': 'Poliweglan',
         'git': 'https://github.com/Poliweglan'
     }
 }
@@ -26,3 +26,15 @@ def get_version_stage():
 
 def get_version_number():
     return __config['version']['number']
+
+
+def get_license():
+    return __config['license']
+
+
+def get_author_username():
+    return __config['author']['username']
+
+
+def get_author_git():
+    return __config['author']['git']
