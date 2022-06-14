@@ -7,7 +7,7 @@ def user_input(size) -> int:
     :param size: max size of menu options
     :return: number of menus
     """
-    input_user = input("Podaj opcję: ")
+    input_user = input("    Podaj opcję: ")
 
     try:
         if input_user == '':

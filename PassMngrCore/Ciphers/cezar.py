@@ -10,7 +10,7 @@ def encryption(value, start=5) -> str:
 
 def decryption(value, start=5) -> str:
     """
-    :param string: value to decrypt.
+    :param value: value to decrypt.
     :param start: how far
     :return: decrypt value
     """

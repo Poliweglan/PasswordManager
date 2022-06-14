@@ -1,5 +1,4 @@
-from PassMngrCore import DisplayMenu, SelectOptions
-from PassMngrCore import UsefulOperations
+from PassMngrCore import DisplayMenu, SelectOptions, UsefulOperations
 from PassMngrCore.DisplayMenu import menu_size
 # import cursor
 # cursor.hide()
@@ -24,14 +23,20 @@ def start() -> None:
             case 1:
                 DisplayMenu.clear_console()
                 SelectOptions.option_add_profil()
+
             case 2:
-                ...
+                DisplayMenu.clear_console()
+                SelectOptions.option_show_profiles()
+
             case 3:
                 ...
+
             case 4:
                 ...
+
             case 5:
                 ...
+
             case 0:
                 stop = True
                 print("Do widzenia!")

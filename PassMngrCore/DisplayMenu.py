@@ -2,10 +2,14 @@ from PassMngrCore import Config
 import os
 
 
+# [2] WYŚWIETL PROFIL
+# [3] EDYTUJ PROFIL
+# [4] USUŃ PROFIL
+# [5] O PROGRAMIE
 menu_size = {
     "main_menu": 5,
     "add_profile_menu": None,
-
+    "show_profiles": 2,
 }
 
 
@@ -45,12 +49,56 @@ def add_profile_menu() -> str:
             - login/mail,
             - hasło
             
-    [-] Jeżeli jakiekolwiek pole zostanie puste:
-        nastąpi anulowanie dodawania.
-
-        [0] POWRÓT
+    [-] Jeżeli jakiekolwiek pole zostanie puste
+        nastąpi anulowanie dodawania oraz powrót.
 """
     return menu
+
+
+def show_profiles_menu() -> str:
+    menu = f"""
+    {program_full_name()}
+
+        [ ] WYŚWIETL PROFIL [ ]
+
+        [1] WYŚWIETL PO NAZWIE
+        [2] WYŚWIETL WSZYSTKO
+
+        [0] POWRÓT
+    """
+    return menu
+
+
+def show_by_name_menu() -> str:
+    menu = f"""
+    {program_full_name()}
+    
+        [ ] WYŚWIETL PO NAZWIE [ ]
+        
+    [-] Należy podać:
+            - nazwę aplikacji
+    
+    [-] Jeżeli jakiekolwiek pole zostanie puste
+        nastąpi anulowanie dodawania oraz powrót.
+    """
+
+    return menu
+
+# def show_all_menu() -> str:
+#     ...
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 if __name__ == '__main__':

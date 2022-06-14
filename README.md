@@ -69,30 +69,54 @@ Program konsolowy służący do zarządzania hasłami, powstał w celach osobist
   - `login` - login konta
   
   - `password` - hasło do konta
-  
+
 Schemat działania:
 
 - Jeżeli jakiekolwiek pole puste:
-      
+  
   - Anuluje dodawania profilu
-    
+
 - Jeżeli wszystkie zapełnione:
-      
+  
   - Wszystkie dane szyfruje i przesyła do `DataOrders.py`
-        
+    
     - `DataOrders.py` sprawdza czy baza istnieje:
-          
+      
       - Jeżeli nie:
-            
+        
         - tworzy bazę i tabelę 
-            
+        
         - dodaje dane
-          
+      
       - Jeżeli tak:
-            
+        
         - dodaje dane
 
 #### WYŚWIETL PROFIL
+
+##### Po nazwie
+
+- Pobiera od użytkownia:
+  
+  - `name` - nazwa użytkownika
+
+Schemat działania:
+
+- Jeśli pole puste:
+  
+  - Anuluje wyświetlanie powórt do menu głównego / wyświetl zastanów się
+
+- jeśli zapełnione: 
+  
+  - wysyła do `DataOrders.py`
+    
+    - `DataOrders.py` sprawdza czy baza istnieje:
+      
+      - jeżeli nie:
+        
+        - błąd i anulowanie (Wprowadź najpierw dane!)
+
+##### Wszystko
 
 #### EDYTUJ PROFIL
 

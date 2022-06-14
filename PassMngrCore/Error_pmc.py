@@ -21,3 +21,8 @@ class ToHighUserOptionError(Exception):
 class ToLowUserOptionError(Exception):
     """User give to low int value"""
     ...
+
+
+class AddProfileEmptyError(Exception):
+    """When name,login,password is empty input"""
+    ...

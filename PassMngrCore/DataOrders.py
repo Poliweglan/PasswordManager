@@ -22,3 +22,10 @@ class BaseConnect:
         self.conn = None
         print(f"close connect with database {self.file_db}")
         print(self.conn, self.file_db)
+
+    def database_exists(self):
+        ...
+
+    def table_exists(self):
+        ...
+
