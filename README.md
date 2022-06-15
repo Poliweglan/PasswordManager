@@ -94,7 +94,7 @@ Schemat działania:
 
 #### WYŚWIETL PROFIL
 
-##### Po nazwie
+##### - Po nazwie
 
 - Pobiera od użytkownia:
   
@@ -115,11 +115,105 @@ Schemat działania:
       - jeżeli nie:
         
         - błąd i anulowanie (Wprowadź najpierw dane!)
+      
+      - Jeżeli tak:
+        
+        - wyszukuje `where name = %name%` 
+          
+          - nie znajduje: 
+            
+            - zwraca (brak pasujacych profili)
+          
+          - znajduje:
+            
+            - zwraca dict do wyświetl profil
+  
+  - dostaje dane , dekoduje i wyświetla
+    
+    ```python
+    # id: 1, Aplikacja: Facebook
+    # login: login, hasło: hasło
+    # 
+    # id: 3, Aplikacja: facebook
+    # login: login, hasło: hasło
+    ```
 
-##### Wszystko
+##### - Wszystko
+
+- Wysyła funkcje do `DataOrders.py`
+  
+  - `DataOrders.py` sprawdza czy baza istnieje:
+    
+    - jeżeli nie:
+      
+      - błąd i anulowanie (Wprowadź najpierw dane!)
+    
+    - Jeżeli tak:
+      
+      - zwraca dane
+        
+- dostaje dane, dekoduje i wyświetla:
+        
+  ```python
+  # id: 1, Aplikacja: Facebook
+  # login: login, hasło: hasło
+  # 
+  # id: 2, Aplikacja: facebook
+  # login: login, hasło: hasło
+  ```
 
 #### EDYTUJ PROFIL
+- pobiera dane:
+
+  - `id` - id profilu
+
+  - `name` - nazwa aplikacji
+  
+  - `login` - nazwa aplikacji
+  
+  - `password` - hasło
+  
+Schemat działania:
+
+ - pyta o id:
+   - pole puste:
+     - anulowanie zadania - bład (pole puste)
+   - pole z literą:
+     - anulowanie zadania - błąd (musi być cyfra)
+   - pole z cyfrą:
+     - pobiera dane o nazwie, loginie i haśle
+       - jeśli jakieś pole jest puste to zapisuje jako None
+       - przekazuje do `DataOrders.py`
+         - `DataOrders.py` sprawdza czy baza istnieje:
+           - jeżeli nie:
+             - błąd i anulowanie (Wprowadź najpierw dane!)
+           - Jeżeli tak:
+             - dokonuje aktualizacji na podstawie id
+ 
 
 #### USUŃ PROFIL
 
+##### - Na podstawie id:
+  
+- pyta o id:
+   - pole puste:
+     - anulowanie zadania - bład (pole puste)
+   - pole z literą:
+     - anulowanie zadania - błąd (musi być cyfra)
+   - pole z cyfrą:
+     - nalezy potwierdzić (input == delete):
+       - przekazuje do `DataOrders.py`
+     - (input != delete):
+       - anulowanie 
+
+##### - Wszystko
+
+- należy potwierdzić:
+  - input == kasuj wszystko:
+    - wysyła do `DataOrders.py` kasowanie
+  - input != kasuj wszystko:
+    - anulowanie
+
 #### O PROGRAMIE
+
+  info o programie xD

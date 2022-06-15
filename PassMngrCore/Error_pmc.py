@@ -8,7 +8,7 @@ class EmptyUserInputError(Exception):
     ...
 
 
-class StringUserInpuError(Exception):
+class StringUserInputError(Exception):
     """User input string, must be int"""
     ...
 
@@ -23,6 +23,11 @@ class ToLowUserOptionError(Exception):
     ...
 
 
+class AllDataIsNoneError(Exception):
+    """if all data is None: name==None, login==None and pass==None"""
+    ...
+
+
 class AddProfileEmptyError(Exception):
-    """When name,login,password is empty input"""
+    """When name, login, password is empty input"""
     ...

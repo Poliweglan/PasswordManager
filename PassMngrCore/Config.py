@@ -1,8 +1,8 @@
 __config = {
     'name': 'PassMngr',
     'version': {
-        'stage': 'Pre-alpha',
-        'number': '0.01'
+        'stage': 'Alpha',
+        'number': '1.00'
     },
     'license': 'MIT',
     'author': {

@@ -15,29 +15,27 @@ def start() -> None:
         if stop:
             break
 
-        DisplayMenu.clear_console()
+        UsefulOperations.clear_console()
         print(DisplayMenu.main_menu())
         select_option = UsefulOperations.user_input(menu_size['main_menu'])
 
         match select_option:
-            case 1:
-                DisplayMenu.clear_console()
+            case 1:  # DODAJ PROFIL
                 SelectOptions.option_add_profil()
 
-            case 2:
-                DisplayMenu.clear_console()
+            case 2:  # WYŚWIETL PROFIL
                 SelectOptions.option_show_profiles()
 
-            case 3:
-                ...
+            case 3:  # EDYTUJ PROFIL
+                SelectOptions.option_edit_profiles()
 
-            case 4:
-                ...
+            case 4:  # USUŃ PROFIL
+                SelectOptions.option_delete_profiles()
 
-            case 5:
-                ...
+            case 5:  # O PROGRAMIE
+                SelectOptions.option_about()
 
-            case 0:
+            case 0:  # WYJŚCIE
                 stop = True
                 print("Do widzenia!")
                 input("Aby zamknąć wciśnij enter")
