@@ -20,7 +20,7 @@ def option_add_profil() -> None:
 
         add_data = {"name": name, "login": login, "password": password}
 
-        if name == '' or login == '' or password == '':
+        if any([True if x == '' else False for x in [name, login, password]]):
             raise AddProfileEmptyError
 
     except AddProfileEmptyError:
@@ -128,21 +128,24 @@ def option_edit_profiles() -> None:
         select_id = UsefulOperations.user_input_id()
 
         if select_id > 0:
-            # wyjście do bazy z zapytaniem o podanie danych na podstawie id
+            # Wyjście do bazy z zapytaniem o podanie danych na podstawie id np. select_id = 3
             # data_for_edit = {'id': 3, 'name': 'Facebook', 'login': 'Karol Kowalski', 'password': 'WTF123'}
-            # przykład zwrotu
+            # jeżeli id za wysokie zwraca None
 
             with DataOrders.BaseConnect(DATABASE_URL) as conn:
                 data_for_edit = conn.show_by_id(select_id)
 
-                show_old_data = f"\n" \
-                                f"    [D] Dane wybrane do edycji: \n\n" \
-                                f"    [id]:. . . . . {data_for_edit['id']} \n" \
-                                f"    [Aplikacja]: . {data_for_edit['name']} \n" \
-                                f"    [login]: . . . {cipher.decryption(data_for_edit['login'])} \n" \
-                                f"    [Hasło]: . . . {cipher.decryption(data_for_edit['password'])} \n"
+                if data_for_edit is not None:
+                    show_old_data = f"\n" \
+                                    f"    [D] Dane wybrane do edycji: \n\n" \
+                                    f"    [id]:. . . . . {data_for_edit['id']} \n" \
+                                    f"    [Aplikacja]: . {data_for_edit['name']} \n" \
+                                    f"    [login]: . . . {cipher.decryption(data_for_edit['login'])} \n" \
+                                    f"    [Hasło]: . . . {cipher.decryption(data_for_edit['password'])} \n"
+                else:
+                    raise ToHighUserOptionError
 
-            print(show_old_data)
+                print(show_old_data)
 
             new_data = UsefulOperations.user_input_data(
                 select_id,
@@ -151,7 +154,9 @@ def option_edit_profiles() -> None:
                 password=True
             )  # [id, name, login, password]
 
-            if all(element is None for element in [new_data.values()][1:]):
+            # if new_data['name'] is None and new_data['login'] is None and new_data['password'] is None:
+            # print(list(new_data.values()))
+            if all(element is None for element in list(new_data.values())[1:]):
                 raise EmptyUserInputError
 
             if new_data['id'] is None or new_data['id'] <= 0:
@@ -164,6 +169,10 @@ def option_edit_profiles() -> None:
 
     except EmptyUserInputError:
         print("[!] Nie podano danych! Anulowanie edycji.")
+        input("[<] Aby kontynuować wciśnij enter.")
+
+    except ToHighUserOptionError:
+        print("[!] Podano zbyt wysokie id! Anulowanie edycji.")
         input("[<] Aby kontynuować wciśnij enter.")
 
     else:
@@ -204,34 +213,40 @@ def option_delete_profiles() -> None:
                     input("[<] Aby kontynuować wciśnij enter.")
 
                 else:
-                    # wyjście do bazy z zapytaniem o podanie danych na podstawie id
-                    with DataOrders.BaseConnect(DATABASE_URL) as conn:
-                        data_dict = conn.show_by_id(del_id)
-
-                        # przykład zwrotu
-
-                        show_data_del = f"    [D] Dane wybrane do usunięcia: \n\n" \
-                                        f"    [id]:. . . . . {data_dict['id']} \n" \
-                                        f"    [Aplikacja]: . {data_dict['name']} \n" \
-                                        f"    [login]: . . . {cipher.decryption(data_dict['login'])} \n" \
-                                        f"    [Hasło]: . . . {cipher.decryption(data_dict['password'])} \n"
-
-                        print(show_data_del)
-
-                    if_sure = input("    [>] Zatwierdzić usuwanie? (Tak/Nie): ")
-
-                    if if_sure.lower() == "tak" or if_sure.lower() == 't':
-                        UsefulOperations.clear_console()
-                        print("    [D] Usunięto dane o podanym id")
+                    try:
+                        # wyjście do bazy z zapytaniem o podanie danych na podstawie id
                         with DataOrders.BaseConnect(DATABASE_URL) as conn:
-                            conn.del_by_id(del_id)
+                            data_dict = conn.show_by_id(del_id)
 
+                            # przykład zwrotu
+                            if data_dict is not None:
+                                show_data_del = f"    [D] Dane wybrane do usunięcia: \n\n" \
+                                                f"    [id]:. . . . . {data_dict['id']} \n" \
+                                                f"    [Aplikacja]: . {data_dict['name']} \n" \
+                                                f"    [login]: . . . {cipher.decryption(data_dict['login'])} \n" \
+                                                f"    [Hasło]: . . . {cipher.decryption(data_dict['password'])} \n"
+
+                                print(show_data_del)
+                            else:
+                                raise ToHighUserOptionError
+
+                        if_sure = input("    [>] Zatwierdzić usuwanie? (Tak/Nie): ")
+
+                        if if_sure.lower() == "tak" or if_sure.lower() == 't':
+                            UsefulOperations.clear_console()
+                            print("    [D] Usunięto dane o podanym id")
+                            with DataOrders.BaseConnect(DATABASE_URL) as conn:
+                                conn.del_by_id(del_id)
+
+                            input("[<] Aby kontynuować wciśnij enter.")
+
+                        else:
+                            print("[!] Anulowano!")
+                            input("[<] Aby kontynuować wciśnij enter.")
+
+                    except ToHighUserOptionError:
+                        print("[!] Podano zbyt wysokie id! Anulowanie edycji.")
                         input("[<] Aby kontynuować wciśnij enter.")
-
-                    else:
-                        print("[!] Anulowano!")
-                        input("[<] Aby kontynuować wciśnij enter.")
-
             case 2:
                 UsefulOperations.clear_console()
                 print(DisplayMenu.delete_profiles_delall_menu())

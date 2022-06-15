@@ -85,7 +85,7 @@ class BaseConnect:
         """
         get dict of values finds by id in database
         :param find_id: id to find
-        :return: elements from database
+        :return: elements from database if to high return None
         """
         cur = self.conn.cursor()
         sql = "SELECT * FROM Passwd WHERE id = ?"
@@ -93,9 +93,11 @@ class BaseConnect:
         rows = cur.fetchall()
         out_find = None
 
-        for row in rows:
-            out_find = dict(zip(self.__structure, row))
+        if rows != []:
+            for row in rows:
+                out_find = dict(zip(self.__structure, row))
 
+        print(out_find)
         return out_find
 
     def show_by_name(self, find_name) -> list:
@@ -143,19 +145,19 @@ class BaseConnect:
             sql = 'UPDATE Passwd SET name = ? WHERE id = ?'
             cur.execute(sql, (new_data['name'], new_data['id']))
             self.conn.commit()
-            print("git nazwa")
+            # print("git nazwa")
 
         if new_data['login'] is not None:
             sql = 'UPDATE Passwd SET login = ? WHERE id = ?'
             cur.execute(sql, (new_data['login'], new_data['id']))
             self.conn.commit()
-            print("git login")
+            # print("git login")
 
         if new_data['password'] is not None:
             sql = 'UPDATE Passwd SET password = ? WHERE id = ?'
             cur.execute(sql, (new_data['password'], new_data['id']))
             self.conn.commit()
-            print("git pass")
+            # print("git pass")
 
     def del_by_id(self, del_id) -> None:
         """
