@@ -82,12 +82,12 @@ def user_input_id() -> int:
 
 def user_input_data(puid=None, name=False, login=False, password=False) -> dict:
     """
-    Validate data, name, login, password.
-    :param puid: edit for give id.
-    :param name: if True add value else add None to list.
-    :param login: if True add value else add None to list.
-    :param password: if True add value else add None to list.
-    :return: if any value is not empty return list.
+    Validate data, name, login, password
+    :param puid: edit for give id
+    :param name: if True add value else add None to list
+    :param login: if True add value else add None to list
+    :param password: if True add value else add None to list
+    :return: if any value is not empty return list
     """
     input_pass = None
     input_login = None

@@ -129,7 +129,8 @@ def option_edit_profiles() -> None:
 
         if select_id > 0:
             # wyjście do bazy z zapytaniem o podanie danych na podstawie id
-            # data_for_edit = {'id': 3, 'name': 'Facebook', 'login': 'Karol Kowalski', 'password': 'WTF123'}  # przykład zwrotu
+            # data_for_edit = {'id': 3, 'name': 'Facebook', 'login': 'Karol Kowalski', 'password': 'WTF123'}
+            # przykład zwrotu
 
             with DataOrders.BaseConnect(DATABASE_URL) as conn:
                 data_for_edit = conn.show_by_id(select_id)

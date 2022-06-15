@@ -29,5 +29,5 @@ class AllDataIsNoneError(Exception):
 
 
 class AddProfileEmptyError(Exception):
-    """When name, login, password is empty input"""
+    """When give name, login, password is empty input"""
     ...
